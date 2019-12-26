@@ -1,0 +1,227 @@
+\hypertarget{class_adjacency_list}{}\doxysection{Adjacency\+List Class Reference}
+\label{class_adjacency_list}\index{AdjacencyList@{AdjacencyList}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_adjacency_list_adc2a292c9d7e47374294e5c642e97e0b}{add\+\_\+vertex}} ()
+\item 
+bool \mbox{\hyperlink{class_adjacency_list_a8e1fc28650dc8b739f25aefb7d02aa6b}{add\+\_\+edge}} (int u, int v, int w=0)
+\item 
+void \mbox{\hyperlink{class_adjacency_list_a3fa350f92c664fdfdb8cb4eb5dde83ef}{remove\+\_\+edge}} (int u, int v)
+\item 
+bool \mbox{\hyperlink{class_adjacency_list_a5ac6c3a1a8bfe0c6fdab16d6debc78c6}{negative\+\_\+edge\+\_\+exists}} ()
+\item 
+void \mbox{\hyperlink{class_adjacency_list_a45d158da853f76983592ec46056fc895}{print\+\_\+debug}} ()
+\item 
+vector$<$ set$<$ \mbox{\hyperlink{class_edge}{Edge}} $>$ $>$\+::iterator \mbox{\hyperlink{class_adjacency_list_ade43a0aca11f0ae3b01938925e916d8e}{begin}} ()
+\item 
+vector$<$ set$<$ \mbox{\hyperlink{class_edge}{Edge}} $>$ $>$\+::iterator \mbox{\hyperlink{class_adjacency_list_ad606db5a16b310b05728dfcbdabf7798}{end}} ()
+\item 
+set$<$ \mbox{\hyperlink{class_edge}{Edge}} $>$\+::iterator \mbox{\hyperlink{class_adjacency_list_a9b3562bef789144385c061fc088726d9}{vertex\+\_\+begin}} (int v)
+\item 
+set$<$ \mbox{\hyperlink{class_edge}{Edge}} $>$\+::iterator \mbox{\hyperlink{class_adjacency_list_a366d3f21ff475199cf11d46a85369bfa}{vertex\+\_\+end}} (int v)
+\item 
+pair$<$ vector$<$ double $>$, vector$<$ int $>$ $>$ \mbox{\hyperlink{class_adjacency_list_afbb4fcad2e3af23d097bb7c761fad48b}{sp\+\_\+djikstra}} (int s)
+\item 
+pair$<$ vector$<$ double $>$, vector$<$ int $>$ $>$ \mbox{\hyperlink{class_adjacency_list_a1eec17eb5fa60e3f317f2e2479d83a7e}{sp\+\_\+bellman\+\_\+ford}} (int s)
+\item 
+vector$<$ vector$<$ double $>$ $>$ \mbox{\hyperlink{class_adjacency_list_acff48dd37115ddc86e0baaaa475328ad}{sp\+\_\+floyd\+\_\+warshall}} ()
+\item 
+vector$<$ int $>$ \mbox{\hyperlink{class_adjacency_list_a2c8a05589ed88c604962bd517a578dfa}{sat\+\_\+four\+\_\+color}} ()
+\item 
+vector$<$ int $>$ \mbox{\hyperlink{class_adjacency_list_a82f67f352a046b4eab785b9d393f282a}{sat\+\_\+four\+\_\+color\+\_\+ac3}} ()
+\item 
+\mbox{\Hypertarget{class_adjacency_list_a1b3e80c37e7b3d87615024fddae6e20a}\label{class_adjacency_list_a1b3e80c37e7b3d87615024fddae6e20a}} 
+void {\bfseries sat\+\_\+four\+\_\+color\+\_\+ac3\+\_\+kernel} (vector$<$ vector$<$ int $>$ $>$ \&domain)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_adjacency_list_a8e1fc28650dc8b739f25aefb7d02aa6b}\label{class_adjacency_list_a8e1fc28650dc8b739f25aefb7d02aa6b}} 
+\index{AdjacencyList@{AdjacencyList}!add\_edge@{add\_edge}}
+\index{add\_edge@{add\_edge}!AdjacencyList@{AdjacencyList}}
+\doxysubsubsection{\texorpdfstring{add\_edge()}{add\_edge()}}
+{\footnotesize\ttfamily bool Adjacency\+List\+::add\+\_\+edge (\begin{DoxyParamCaption}\item[{int}]{u,  }\item[{int}]{v,  }\item[{int}]{w = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+Adds an edge from a vertex to a vertex. Does not add duplicate edges (i.\+e., same (u, v)).
+
+
+\begin{DoxyParams}{Parameters}
+{\em u} & the source vertex. \\
+\hline
+{\em v} & the destination vertex. \\
+\hline
+{\em w} & the weight of the edge. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true on success, false on failure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_adjacency_list_adc2a292c9d7e47374294e5c642e97e0b}\label{class_adjacency_list_adc2a292c9d7e47374294e5c642e97e0b}} 
+\index{AdjacencyList@{AdjacencyList}!add\_vertex@{add\_vertex}}
+\index{add\_vertex@{add\_vertex}!AdjacencyList@{AdjacencyList}}
+\doxysubsubsection{\texorpdfstring{add\_vertex()}{add\_vertex()}}
+{\footnotesize\ttfamily int Adjacency\+List\+::add\+\_\+vertex (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Adds a vertex to the adjacency list.
+
+\begin{DoxyReturn}{Returns}
+the integer key of the created vertex 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_adjacency_list_ade43a0aca11f0ae3b01938925e916d8e}\label{class_adjacency_list_ade43a0aca11f0ae3b01938925e916d8e}} 
+\index{AdjacencyList@{AdjacencyList}!begin@{begin}}
+\index{begin@{begin}!AdjacencyList@{AdjacencyList}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily vector$<$ set$<$ \mbox{\hyperlink{class_edge}{Edge}} $>$ $>$\+::iterator Adjacency\+List\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns iterator to first vertex edge set.
+
+\begin{DoxyReturn}{Returns}
+iterator pointing to first vertex. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_adjacency_list_ad606db5a16b310b05728dfcbdabf7798}\label{class_adjacency_list_ad606db5a16b310b05728dfcbdabf7798}} 
+\index{AdjacencyList@{AdjacencyList}!end@{end}}
+\index{end@{end}!AdjacencyList@{AdjacencyList}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily vector$<$ set$<$ \mbox{\hyperlink{class_edge}{Edge}} $>$ $>$\+::iterator Adjacency\+List\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns the end iterator of the vertex vector.
+
+\begin{DoxyReturn}{Returns}
+end iterator of the vertex vector. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_adjacency_list_a5ac6c3a1a8bfe0c6fdab16d6debc78c6}\label{class_adjacency_list_a5ac6c3a1a8bfe0c6fdab16d6debc78c6}} 
+\index{AdjacencyList@{AdjacencyList}!negative\_edge\_exists@{negative\_edge\_exists}}
+\index{negative\_edge\_exists@{negative\_edge\_exists}!AdjacencyList@{AdjacencyList}}
+\doxysubsubsection{\texorpdfstring{negative\_edge\_exists()}{negative\_edge\_exists()}}
+{\footnotesize\ttfamily bool Adjacency\+List\+::negative\+\_\+edge\+\_\+exists (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns if a negative edge is present in the graph.
+
+\begin{DoxyReturn}{Returns}
+true if negative edge exists, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_adjacency_list_a45d158da853f76983592ec46056fc895}\label{class_adjacency_list_a45d158da853f76983592ec46056fc895}} 
+\index{AdjacencyList@{AdjacencyList}!print\_debug@{print\_debug}}
+\index{print\_debug@{print\_debug}!AdjacencyList@{AdjacencyList}}
+\doxysubsubsection{\texorpdfstring{print\_debug()}{print\_debug()}}
+{\footnotesize\ttfamily void Adjacency\+List\+::print\+\_\+debug (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Debug output of the adjacency list. \mbox{\Hypertarget{class_adjacency_list_a3fa350f92c664fdfdb8cb4eb5dde83ef}\label{class_adjacency_list_a3fa350f92c664fdfdb8cb4eb5dde83ef}} 
+\index{AdjacencyList@{AdjacencyList}!remove\_edge@{remove\_edge}}
+\index{remove\_edge@{remove\_edge}!AdjacencyList@{AdjacencyList}}
+\doxysubsubsection{\texorpdfstring{remove\_edge()}{remove\_edge()}}
+{\footnotesize\ttfamily void Adjacency\+List\+::remove\+\_\+edge (\begin{DoxyParamCaption}\item[{int}]{u,  }\item[{int}]{v }\end{DoxyParamCaption})}
+
+Removes an edge.
+
+
+\begin{DoxyParams}{Parameters}
+{\em u} & the source vertex. \\
+\hline
+{\em v} & the destination vertex. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_adjacency_list_a2c8a05589ed88c604962bd517a578dfa}\label{class_adjacency_list_a2c8a05589ed88c604962bd517a578dfa}} 
+\index{AdjacencyList@{AdjacencyList}!sat\_four\_color@{sat\_four\_color}}
+\index{sat\_four\_color@{sat\_four\_color}!AdjacencyList@{AdjacencyList}}
+\doxysubsubsection{\texorpdfstring{sat\_four\_color()}{sat\_four\_color()}}
+{\footnotesize\ttfamily vector$<$ int $>$ Adjacency\+List\+::sat\+\_\+four\+\_\+color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Finds the four coloring of the graph, if it exists.
+
+\begin{DoxyReturn}{Returns}
+A vector of values 0 -\/$>$ 3, corresponding to the color of the vertex at the index. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_adjacency_list_a82f67f352a046b4eab785b9d393f282a}\label{class_adjacency_list_a82f67f352a046b4eab785b9d393f282a}} 
+\index{AdjacencyList@{AdjacencyList}!sat\_four\_color\_ac3@{sat\_four\_color\_ac3}}
+\index{sat\_four\_color\_ac3@{sat\_four\_color\_ac3}!AdjacencyList@{AdjacencyList}}
+\doxysubsubsection{\texorpdfstring{sat\_four\_color\_ac3()}{sat\_four\_color\_ac3()}}
+{\footnotesize\ttfamily vector$<$ int $>$ Adjacency\+List\+::sat\+\_\+four\+\_\+color\+\_\+ac3 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Finds the four of the graph, if it exists, using A\+C-\/3.
+
+\begin{DoxyReturn}{Returns}
+A vector of values 0 -\/$>$ 3, corresponding to the color of the vertex at the index. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_adjacency_list_a1eec17eb5fa60e3f317f2e2479d83a7e}\label{class_adjacency_list_a1eec17eb5fa60e3f317f2e2479d83a7e}} 
+\index{AdjacencyList@{AdjacencyList}!sp\_bellman\_ford@{sp\_bellman\_ford}}
+\index{sp\_bellman\_ford@{sp\_bellman\_ford}!AdjacencyList@{AdjacencyList}}
+\doxysubsubsection{\texorpdfstring{sp\_bellman\_ford()}{sp\_bellman\_ford()}}
+{\footnotesize\ttfamily pair$<$ vector$<$ double $>$, vector$<$ int $>$ $>$ Adjacency\+List\+::sp\+\_\+bellman\+\_\+ford (\begin{DoxyParamCaption}\item[{int}]{s }\end{DoxyParamCaption})}
+
+Performs Bellman-\/\+Ford\textquotesingle{}s shortest path algorithm on the graph starting at some vertex.
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & the start vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pair of vectors, the first is dist\mbox{[}\mbox{]} and the second is pred\mbox{[}\mbox{]} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_adjacency_list_afbb4fcad2e3af23d097bb7c761fad48b}\label{class_adjacency_list_afbb4fcad2e3af23d097bb7c761fad48b}} 
+\index{AdjacencyList@{AdjacencyList}!sp\_djikstra@{sp\_djikstra}}
+\index{sp\_djikstra@{sp\_djikstra}!AdjacencyList@{AdjacencyList}}
+\doxysubsubsection{\texorpdfstring{sp\_djikstra()}{sp\_djikstra()}}
+{\footnotesize\ttfamily pair$<$ vector$<$ double $>$, vector$<$ int $>$ $>$ Adjacency\+List\+::sp\+\_\+djikstra (\begin{DoxyParamCaption}\item[{int}]{s }\end{DoxyParamCaption})}
+
+Performs Djikstra\textquotesingle{}s shortest path algorithm on the graph starting at some vertex.
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & the start vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pair of vectors, the first is dist\mbox{[}\mbox{]} and the second is pred\mbox{[}\mbox{]}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_adjacency_list_acff48dd37115ddc86e0baaaa475328ad}\label{class_adjacency_list_acff48dd37115ddc86e0baaaa475328ad}} 
+\index{AdjacencyList@{AdjacencyList}!sp\_floyd\_warshall@{sp\_floyd\_warshall}}
+\index{sp\_floyd\_warshall@{sp\_floyd\_warshall}!AdjacencyList@{AdjacencyList}}
+\doxysubsubsection{\texorpdfstring{sp\_floyd\_warshall()}{sp\_floyd\_warshall()}}
+{\footnotesize\ttfamily vector$<$ vector$<$ double $>$ $>$ Adjacency\+List\+::sp\+\_\+floyd\+\_\+warshall (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Finds all pairs shortest paths in the graph, using Floyd-\/\+Warshall\textquotesingle{}s dynamic programming algorithm. Takes big-\/theta($\vert$\+V$\vert$$^\wedge$3).
+
+\begin{DoxyReturn}{Returns}
+A 2D vector of doubles containing the minimum distances. dist\mbox{[}u\mbox{]}\mbox{[}v\mbox{]} = min distance from u to v. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_adjacency_list_a9b3562bef789144385c061fc088726d9}\label{class_adjacency_list_a9b3562bef789144385c061fc088726d9}} 
+\index{AdjacencyList@{AdjacencyList}!vertex\_begin@{vertex\_begin}}
+\index{vertex\_begin@{vertex\_begin}!AdjacencyList@{AdjacencyList}}
+\doxysubsubsection{\texorpdfstring{vertex\_begin()}{vertex\_begin()}}
+{\footnotesize\ttfamily set$<$ \mbox{\hyperlink{class_edge}{Edge}} $>$\+::iterator Adjacency\+List\+::vertex\+\_\+begin (\begin{DoxyParamCaption}\item[{int}]{v }\end{DoxyParamCaption})}
+
+Returns iterator to beginning of a vertex\textquotesingle{}s edge set.
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & the vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+begin iterator for the edge set. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_adjacency_list_a366d3f21ff475199cf11d46a85369bfa}\label{class_adjacency_list_a366d3f21ff475199cf11d46a85369bfa}} 
+\index{AdjacencyList@{AdjacencyList}!vertex\_end@{vertex\_end}}
+\index{vertex\_end@{vertex\_end}!AdjacencyList@{AdjacencyList}}
+\doxysubsubsection{\texorpdfstring{vertex\_end()}{vertex\_end()}}
+{\footnotesize\ttfamily set$<$ \mbox{\hyperlink{class_edge}{Edge}} $>$\+::iterator Adjacency\+List\+::vertex\+\_\+end (\begin{DoxyParamCaption}\item[{int}]{v }\end{DoxyParamCaption})}
+
+Returns the end iterator of a vertex\textquotesingle{}s edge set.
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & the vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+end iterator for the edge set. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Adjacency\+List.\+h\item 
+Adjacency\+List.\+cpp\end{DoxyCompactItemize}
