@@ -181,6 +181,7 @@ bool AdjacencyList::sat_four_color_recursive(vector< vector<int> > options, vect
 		skip = false;
 
 		//Remove the color option from all adjacent vertices
+		//sat_four_color_ac3_kernel(temp_options);
 		for (Edge edge : adj_list.at(cur))
 		{
 			vector<int> *edge_opts = &temp_options.at(edge.to());
@@ -202,8 +203,183 @@ bool AdjacencyList::sat_four_color_recursive(vector< vector<int> > options, vect
 
 	//No solution exists with the current combination
 	return false;
+}
+
+vector<int> AdjacencyList::sat_four_color_ac3()
+{
+	vector< vector<int> > domain(adj_list.size(), vector<int>{0, 1, 2, 3});
+	
+	domain.at(0) = vector<int>{ 0 };
+	bool done = false;
+
+	while (!done)
+	{
+		sat_four_color_ac3_kernel(domain);
+
+		done = true;
+		for (int i = 0; i < domain.size(); i++)
+		{
+			if (domain.at(i).size() > 1)
+			{
+				done = false;
+				domain.at(i) = vector<int>(1, domain.at(i).at(0));
+				break;
+			}
+		}
+	}
+
+	vector<int> solution(adj_list.size());
+
+	for (int i = 0; i < domain.size(); i++)
+	{
+		if (!domain.at(i).size())
+			continue;
+		solution[i] = domain[i][0];
+	}
+	return solution;
+}
+
+void AdjacencyList::sat_four_color_ac3_kernel(vector< vector<int> >& domain)
+{
+	vector< vector<int> > options = domain;
+	list<int> worklist;
+	int c;
+	int x = 0;
 
 
+	for (set<Edge> vertex : adj_list)
+	{
+		//No unary constraints
+
+		//Add all binary constraints
+		for (Edge e : vertex)
+			worklist.push_back(e.to());
+
+		while (worklist.size())
+		{
+			c = worklist.front();
+
+			if (sat_ac3_arc_reduce(options, x, c))
+			{
+				if (!options.at(x).size())
+					//Failure
+					cout << "Failure" << endl;
+				else
+				{
+					for (Edge v : vertex)
+						if (v.to() != c)
+							worklist.push_back(v.to());
+				}
+			}
+
+			worklist.pop_front();
+		}
+		x++;
+	}
+
+	domain = options;
+}
+
+bool AdjacencyList::sat_ac3_arc_reduce(vector< vector<int> >& domain, int x, int y)
+{
+	bool change = false;
+	bool color_allowed;
+
+	for (int x_color : domain.at(x))
+	{
+		color_allowed = false;
+		for (int y_color : domain.at(y))
+		{
+			if (y_color != x_color)
+				color_allowed = true;
+		}
+		
+		if (!color_allowed)
+		{
+			vector<int> *x_domain = &domain.at(x);
+			x_domain->erase(remove(x_domain->begin(), x_domain->end(), x_color), x_domain->end());
+			cout << "ERASING: " << x_color << endl;
+			change = true;
+		}
+	}
+
+	return change;
+}
+
+//All pairs shortest paths using Floyd-Warshall Algorithm (Dynamic Programming)
+vector< vector<double> > AdjacencyList::sp_floyd_warshall()
+{
+	size_t v_len = adj_list.size();
+
+	//Create AdjacencyMatrix
+	vector< vector<double> > adj_matrix(v_len, vector<double>(v_len, 0));
+
+	vector< vector<double> > dist(v_len, vector<double>(v_len, numeric_limits<double>::infinity()));
+
+	int u = 0;
+	for (set<Edge> vertex : adj_list)
+	{
+		dist[u][u] = 0;
+		for (Edge edge : vertex)
+		{
+			adj_matrix[u][edge.to()] = edge.weight();
+			dist[u][edge.to()] = edge.weight();
+		}
+		u++;
+	}
+
+	for (int k = 0; k < v_len; k++)
+		for (int i = 0; i < v_len; i++)
+			for (int j = 0; j < v_len; j++)
+				if (dist[i][j] > dist[i][k] + dist[k][j])
+					dist[i][j] = dist[i][k] + dist[k][j];
+
+	return dist;
+}
+
+pair< vector<double>, vector<int> > AdjacencyList::sp_bellman_ford(int s)
+{
+	vector<double> dist(adj_list.size(), numeric_limits<double>::infinity());
+	vector<int> pred(adj_list.size(), -1);
+	dist[s] = 0;
+
+	int u;
+
+	//Relax |V| - 1 times
+	for (int v = 0; v < adj_list.size() - 1; v++)
+	{
+		u = 0;
+		for (set<Edge> vertex : adj_list)
+		{
+			for (Edge e : vertex)
+			{
+				if (dist[u] + e.weight() < dist[e.to()])
+				{
+					dist[e.to()] = dist[u] + e.weight();
+					pred[e.to()] = u;
+				}
+			}
+			u++;
+		}
+	}
+
+	u = 0;
+
+	//One more run through. If RELAX succeeds, then there is a negative cost cyle
+	for (set<Edge> vertex : adj_list)
+	{
+		for (Edge e : vertex)
+		{
+			if (dist[u] + e.weight() < dist[e.to()])
+			{
+				//Uh oh, negative weight cycle!
+				throw logic_error("Negative weight/cost cycle in graph");
+			}
+		}
+		u++;
+	}
+
+	return pair< vector<double>, vector<int>>(dist, pred);
 }
 
 			

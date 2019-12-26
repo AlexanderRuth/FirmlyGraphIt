@@ -5,6 +5,7 @@
 #include <queue>
 #include <bitset>
 #include <algorithm>
+#include <list>
 #include "Edge.h"
 
 using namespace std;
@@ -91,15 +92,44 @@ public:
 		@return A pair of vectors, the first is dist[]
 		and the second is pred[].
 	*/
-	pair<vector<double>, vector<int>> sp_djikstra(int s);
+	pair< vector<double>, vector<int> > sp_djikstra(int s);
+
+	/*
+		Performs Bellman-Ford's shortest path algorithm on the
+		graph starting at some vertex.
+
+		@param s the start vertex.
+		@return A pair of vectors, the first is dist[]
+		and the second is pred[]
+	*/
+	pair< vector<double>, vector<int> > sp_bellman_ford(int s);
+
+	/*
+		Finds all pairs shortest paths in the graph, using Floyd-Warshall's
+		dynamic programming algorithm. Takes big-theta(|V|^3).
+
+		@return A 2D vector of doubles containing the minimum distances.
+		dist[u][v] = min distance from u to v.
+	*/
+	vector< vector<double> > sp_floyd_warshall();
 
 	/*
 		Finds the four coloring of the graph, if it exists.
 
 		@return A vector of values 0 -> 3, corresponding to
-		the color of the vertex corresponding to the index.
+		the color of the vertex at the index.
 	*/
 	vector<int> sat_four_color();
+
+	/*
+		Finds the four of the graph, if it exists, using AC-3.
+
+		@return A vector of values 0 -> 3, corresponding to
+		the color of the vertex at the index.
+	*/
+	vector<int> sat_four_color_ac3();
+
+	void sat_four_color_ac3_kernel(vector< vector<int> > &domain);
 
 private:
 
@@ -118,4 +148,6 @@ private:
 		@return true if coloring found for vertices cur thru n, false otherwise.
 	*/
 	bool sat_four_color_recursive(vector< vector<int> > options, vector<int> & solution, int cur);
+
+	bool sat_ac3_arc_reduce(vector< vector<int> >& domain, int x, int y);
 };

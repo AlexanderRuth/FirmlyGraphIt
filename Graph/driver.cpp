@@ -9,7 +9,7 @@ void sp_states(string s, string d);
 
 int main()
 {
-	sp_states("Maryland", "Maine");
+	sp_states("Washington", "Florida");
 	return 0;
 }
 
@@ -59,6 +59,7 @@ void sp_states(string s, string d)
 
 	fs.close();
 
+#if 0
 	pair<vector<double>, vector<int> > sp = g.sp_djikstra(state_to_int[s]);
 
 	cout << "From " << d << " to " << s << ": " << endl;
@@ -82,5 +83,38 @@ void sp_states(string s, string d)
 		cout << int_to_state[cur] << ": " << color << endl;
 		cur++;
 	}
+#endif
 
+	pair<vector<double>, vector<int>> sp_djik = g.sp_djikstra(state_to_int[s]);
+	pair<vector<double>, vector<int>> sp_bell = g.sp_bellman_ford(state_to_int[s]);
+
+	vector< vector<double> > sp = g.sp_floyd_warshall();
+
+#if 0
+	cout << '\t';
+
+	for (map<string,int>::iterator it = state_to_int.begin() ; it != state_to_int.end(); it++)
+	{
+		cout << it->first << "\t ";
+	}
+	cout << endl;
+
+	for (int i = 0; i < sp.size(); i++)
+	{
+		cout << int_to_state[i] << "\t ";
+		for (int j = 0; j < sp.size(); j++)
+			cout << sp[i][j] << "\t ";
+		cout << endl;
+	}
+#endif
+
+	bool good = true;
+	for (int i = 0; i < sp_djik.first.size(); i++)
+		if (sp_djik.first[i] != sp_bell.first[i] || sp_djik.first[i] != sp[state_to_int[s]][i])
+			good = false;
+
+	if (good)
+		cout << "Output matched!" << endl;
+	if (!good)
+		cout << "Output different!" << endl;
 }
